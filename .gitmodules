@@ -1,0 +1,3 @@
+[submodule "demos"]
+	path = demos
+	url = git@gitee.com:lzy49/demos.git
