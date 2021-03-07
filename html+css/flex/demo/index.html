@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>常用布局配置</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <h3>布局一：骰子布局</h3>
+  <div class="wrap dice">
+    <div class="box t1">
+      <div class="item"></div>
+    </div>
+    <div class="box t2">
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="box t3">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <div class="box t4">
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+    <div class="box t5">
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+      <div class="row">
+        <div class="item"></div>
+      </div>
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+    <div class="box t6">
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+      <div class="row">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap dice2">
+    <div class="box t1">
+      <div class="item"></div>
+    </div>
+    <div class="box t2">
+      <div class="item"></div>
+    </div>
+    <div class="box t3">
+      <div class="item"></div>
+    </div>
+    <div class="box t4">
+      <div class="item"></div>
+    </div>
+    <div class="box t5">
+      <div class="item"></div>
+    </div>
+    <div class="box t6">
+      <div class="item"></div>
+    </div>
+    <div class="box t7">
+      <div class="item"></div>
+    </div>
+    <div class="box t8">
+      <div class="item"></div>
+    </div>
+    <div class="box t9">
+      <div class="item"></div>
+    </div>
+  </div>
+  <h3>网格布局</h3>
+  <p>要求：当页面缩放时，内容会按比例缩放</p>
+  <div class="wrap box-1">
+    <div class="row">
+      <div class="item">1/2</div>
+      <div class="item">1/2</div>
+    </div>
+    <div class="row">
+      <div class="item">1/3</div>
+      <div class="item">1/3</div>
+      <div class="item">1/3</div>
+    </div>
+    <div class="row">
+      <div class="item">1/4</div>
+      <div class="item">1/4</div>
+      <div class="item">1/4</div>
+      <div class="item">1/4</div>
+    </div>
+  </div>
+  <p>要求：某个网格的宽度为固定的百分比，其余网格平均分配剩余的空间。</p>
+  <div class="wrap box-1">
+    <div class="row">
+      <div class="item">1/2</div>
+      <div class="item u-full4">auto</div>
+      <div class="item u-full4">auto</div>
+    </div>
+    <div class="row">
+      <div class="item">2/3</div>
+      <div class="item u-full3">1/3</div>
+    </div>
+    <div class="row">
+      <div class="item u-full4">1/4</div>
+      <div class="item">auto</div>
+      <div class="item u-full3">1/3</div>
+    </div>
+  </div>
+  <h3>圣杯布局</h3>
+  <div class="wrap HolyGrail">
+    <header > header 高 100px</header>
+    <div class="body">
+      <nav> nav 宽度 300px </nav>
+      <main>main 宽度自动 最小宽度 500px，高度自动</main>
+      <div class="right"> 随着宽度变化变化，如果盒子太小隐藏。最大宽度200px;</div>
+    </div>
+    <footer > footer 高 100px</footer>
+  </div>
+  <h3>输入框布局</h3>
+  <div class="wrap input">
+    <p>📱</p>
+    <input type="text" placeholder="请输入手机号">
+    <button>提交</button>
+  </div>
+  <h3>流式布局</h3>
+  <div class="wrap list">
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+    <div class="item">
+      <img src="img/pic.jpg" alt="">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed, fugiat, exercitationem saepe ipsa repudiandae labore numquam deleniti placeat voluptatem odio eveniet ratione voluptates tempora quas, unde facere quisquam a? Ipsam!</p>
+    </div>
+  </div>
+  <h4>大小字混排</h4>
+  <div class="wrap price">
+    <span>¥</span>
+    <span>298</span>
+    <span>599</span>
+  </div>
+</body>
+</html>

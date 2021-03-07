@@ -1,0 +1,231 @@
+.wrap{
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-wrap:wrap;
+}
+/* 麻将布局 */
+.dice,.dice2{
+  .box{
+    height: 99px;
+    border: 1px solid #ddd;
+    width:99px;
+    margin:10px;
+    display: flex;
+    .item{
+      width: 33px;
+      height: 33px;
+      padding: 7px;
+      box-sizing: border-box;
+      &:after{
+        content: '';
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        border-radius: 50%;
+      }
+    }
+    .row{
+      display: flex;
+    }
+  }
+}
+.dice{
+  >.box{
+    &.t2{
+      justify-content: space-between;
+      >.item{
+        &:last-child{
+          align-self: flex-end;
+        }
+      }
+    }
+    &.t3{
+      >.item{
+        &:nth-child(2){
+          align-self: center;
+        }
+        &:nth-child(3){
+          align-self: flex-end;
+        }
+      }
+    }
+    &.t4{
+      flex-direction: column;
+      justify-content: space-between;
+      .row{
+        justify-content:space-between;
+      }
+    }
+    &.t5{
+      flex-direction: column;
+      .row{
+        justify-content: space-between;
+        &:nth-child(2){
+          justify-content: center;
+        }
+      }
+    }
+    &.t6{
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    &.t7{
+      flex-direction: column;
+    }
+  }
+}
+.dice2{
+  .t2{
+    justify-content: center;
+  }
+  .t3{
+    justify-content: flex-end;
+  }
+  .t4{
+    align-items: center;
+  }
+  .t5{
+    align-items:center;
+    justify-content: center;
+  }
+  .t6{
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .t7{
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  .t8{
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .t9{
+    align-items:flex-end;
+    justify-content: flex-end;
+  }
+}
+/* 网格布局 */
+.box-1{
+  display: flex;
+  >.row{
+    display: flex;
+    flex-basis: 100%;
+    >.item{
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      background: #eee;
+      margin: 10px;
+      padding: 10px 0;
+    }
+    .u-full2{
+      flex: 0 0 50%;
+    }
+    .u-full3{
+      flex: 0 0 33.333%;
+    }
+    .u-full4{
+      flex: 0 0 25%;
+    }
+  }
+}
+/* 圣杯布局 */
+.HolyGrail{
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+  >*{
+    flex: 1;
+  }
+  header,footer{
+    flex: 0 0 100px;
+    background: #666;
+  }
+  >.body{
+    display: flex;
+    >nav{
+      flex: 0 0 300px;
+      background: #85bad9;
+    }
+    >main{
+      flex: 1;
+      // min-width: 500px;
+      background: #d6d6d6;
+    }
+    >.right{
+      width: 100px;
+      background: #ee6f43;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .HolyGrail> .body {
+    flex-direction: column;
+    flex: 1;
+    >*{
+      flex: auto;
+    }
+  }
+}
+/* 输入框布局 */
+.input{
+  height: 30px;
+  >*{
+    flex: 1;
+    align-content: stretch;
+    padding: 0;
+    margin: 0;
+  }
+  >input,button{
+    border: 0;
+  }
+  button,p{
+    flex: 0 0 100px;
+  }
+  p{
+    display: flex;
+    justify-content: center;
+  }
+}
+/* 流式布局 */
+.list{
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding:0 7px;
+  .item{
+    box-sizing: border-box;
+    flex: 0 0 49%;
+    display: flex;
+    border: 1px solid red;
+    margin: 7px 0;
+    >img{
+      width: 5em;
+      height: 5em
+    };
+    >p{
+      margin: 0;
+      flex: 1;
+    }
+  }
+}
+/* 大小字混排 */
+.price{
+  display: flex;
+  align-items: baseline;
+  span{
+    margin:0 4px ;
+    font-size: 30px;
+    &:nth-child(2){
+      font-size: 40px;
+    }
+    &:nth-child(3){
+      font-size: 18px;
+      text-decoration: line-through;
+    }
+  }
+
+}

@@ -1,0 +1,173 @@
+@charset "UTF-8";
+.wrap {
+  width: 100%;
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap; }
+
+/* 麻将布局 */
+.dice .box, .dice2 .box {
+  height: 99px;
+  border: 1px solid #ddd;
+  width: 99px;
+  margin: 10px;
+  display: flex; }
+  .dice .box .item, .dice2 .box .item {
+    width: 33px;
+    height: 33px;
+    padding: 7px;
+    box-sizing: border-box; }
+    .dice .box .item:after, .dice2 .box .item:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      border-radius: 50%; }
+  .dice .box .row, .dice2 .box .row {
+    display: flex; }
+
+.dice > .box.t2 {
+  justify-content: space-between; }
+  .dice > .box.t2 > .item:last-child {
+    align-self: flex-end; }
+.dice > .box.t3 > .item:nth-child(2) {
+  align-self: center; }
+.dice > .box.t3 > .item:nth-child(3) {
+  align-self: flex-end; }
+.dice > .box.t4 {
+  flex-direction: column;
+  justify-content: space-between; }
+  .dice > .box.t4 .row {
+    justify-content: space-between; }
+.dice > .box.t5 {
+  flex-direction: column; }
+  .dice > .box.t5 .row {
+    justify-content: space-between; }
+    .dice > .box.t5 .row:nth-child(2) {
+      justify-content: center; }
+.dice > .box.t6 {
+  flex-direction: column;
+  justify-content: space-between; }
+.dice > .box.t7 {
+  flex-direction: column; }
+
+.dice2 .t2 {
+  justify-content: center; }
+.dice2 .t3 {
+  justify-content: flex-end; }
+.dice2 .t4 {
+  align-items: center; }
+.dice2 .t5 {
+  align-items: center;
+  justify-content: center; }
+.dice2 .t6 {
+  align-items: center;
+  justify-content: flex-end; }
+.dice2 .t7 {
+  align-items: flex-end;
+  justify-content: flex-start; }
+.dice2 .t8 {
+  align-items: flex-end;
+  justify-content: center; }
+.dice2 .t9 {
+  align-items: flex-end;
+  justify-content: flex-end; }
+
+/* 网格布局 */
+.box-1 {
+  display: flex; }
+  .box-1 > .row {
+    display: flex;
+    flex-basis: 100%; }
+    .box-1 > .row > .item {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      background: #eee;
+      margin: 10px;
+      padding: 10px 0; }
+    .box-1 > .row .u-full2 {
+      flex: 0 0 50%; }
+    .box-1 > .row .u-full3 {
+      flex: 0 0 33.333%; }
+    .box-1 > .row .u-full4 {
+      flex: 0 0 25%; }
+
+/* 圣杯布局 */
+.HolyGrail {
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column; }
+  .HolyGrail > * {
+    flex: 1; }
+  .HolyGrail header, .HolyGrail footer {
+    flex: 0 0 100px;
+    background: #666; }
+  .HolyGrail > .body {
+    display: flex; }
+    .HolyGrail > .body > nav {
+      flex: 0 0 300px;
+      background: #85bad9; }
+    .HolyGrail > .body > main {
+      flex: 1;
+      background: #d6d6d6; }
+    .HolyGrail > .body > .right {
+      width: 100px;
+      background: #ee6f43; }
+
+@media (max-width: 768px) {
+  .HolyGrail > .body {
+    flex-direction: column;
+    flex: 1; }
+    .HolyGrail > .body > * {
+      flex: auto; } }
+/* 输入框布局 */
+.input {
+  height: 30px; }
+  .input > * {
+    flex: 1;
+    align-content: stretch;
+    padding: 0;
+    margin: 0; }
+  .input > input, .input button {
+    border: 0; }
+  .input button, .input p {
+    flex: 0 0 100px; }
+  .input p {
+    display: flex;
+    justify-content: center; }
+
+/* 流式布局 */
+.list {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 7px; }
+  .list .item {
+    box-sizing: border-box;
+    flex: 0 0 49%;
+    display: flex;
+    border: 1px solid red;
+    margin: 7px 0; }
+    .list .item > img {
+      width: 5em;
+      height: 5em; }
+    .list .item > p {
+      margin: 0;
+      flex: 1; }
+
+/* 大小字混排 */
+.price {
+  display: flex;
+  align-items: baseline; }
+  .price span {
+    margin: 0 4px;
+    font-size: 30px; }
+    .price span:nth-child(2) {
+      font-size: 40px; }
+    .price span:nth-child(3) {
+      font-size: 18px;
+      text-decoration: line-through; }
+
+/*# sourceMappingURL=main.css.map */
