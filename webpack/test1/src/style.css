@@ -1,9 +1,0 @@
-@font-face {
-  font-family: FiraCode;
-  src: url('./FiraCode-Medium.ttf');
-}
-.hello {
-  color: red;
-  font-family: FiraCode;
-  /* background: url('./pic.jpg'); */
-}

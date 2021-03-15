@@ -1,5 +1,4 @@
 const path = require('path');
-
 module.exports = {
   entry: './src/index.js',
   output: { // 输出这些决定如何输入
