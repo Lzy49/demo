@@ -1,0 +1,1 @@
+console.log('我会被第一个执行哦 another-module1')
