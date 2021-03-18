@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './page/slot-test.vue'
 
 Vue.config.productionTip = false
 /* 混入模式 */

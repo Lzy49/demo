@@ -1,5 +1,6 @@
-import(/* webpackPrefetch: true */ './another-module');
-import './another-module1.js'
+// import(/* webpackPrefetch: true */ './another-module');
+// import './another-module1'
+import './another-module'
 import _ from 'lodash'
 function getComponent() {
   const element = document.createElement('div');

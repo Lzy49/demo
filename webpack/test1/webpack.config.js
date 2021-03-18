@@ -21,11 +21,25 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // output 目录对应一个绝对路径。
     clean:true
   },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   // optimization: {
   //   splitChunks: {
   //     chunks: 'all',
   //   },
   // },
+  /*
   module: { // 这些选项决定了如何处理项目中的不同类型的模块。
     rules: [
       {
@@ -50,13 +64,14 @@ module.exports = {
       },
     ],
   },
+  */
   // devtool: 'inline-source-map', // 选择源码地图形式
   // devServer:{
   //   contentBase: './dist',
   // },
   plugins:[
     new HtmlWebpackPlugin({
-      title:'Development'
+      title:'Caching'
     })
   ]
 };
