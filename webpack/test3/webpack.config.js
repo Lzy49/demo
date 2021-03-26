@@ -2,7 +2,7 @@
 var webpack = require('webpack');
 module.exports = {
   entry: {
-      index: "./src/index.js"
+    index: "./src/index.js"
   },
   plugins: [
     new webpack.DefinePlugin({
