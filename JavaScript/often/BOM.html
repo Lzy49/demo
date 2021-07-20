@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOM</title>
+  </head>
+  <body>
+    <div style="width: 100vw; height: 200vh">
+      <style>
+        ::-webkit-scrollbar-track-piece {
+          background-color: #f8f8f8;
+        }
+
+        ::-webkit-scrollbar {
+          width: 9px;
+
+          height: 9px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: red;
+
+          background-clip: padding-box;
+
+          min-height: 28px;
+        }
+      </style>
+    </div>
+    <script>
+      /**
+       * 关于 窗口位置
+       * window.screenLeft // => Number  窗口距离整个桌面左上多少像素
+       * window.screenTop // => Number 窗口距离整个桌面顶部多少像素
+       * window.devicePixelRatio // => Number  物理像素与逻辑像素之间的缩放系数
+       **/
+      function screen() {
+        console.log(window.screenLeft);
+        console.log(window.screenTop);
+        console.log(window.devicePixelRatio);
+      }
+      /**
+       * 窗口大小
+       * - innerWidth // => Number 视图宽度
+       * - innerHeight // => Number 视图高度
+       * - document.documentElement.clientWidth // => 视图宽度
+       * - document.documentElement.clientHeight // => Number 视图高度
+       *
+       * - outerWidth // => Number 整个浏览器大小
+       * - outerWidth // => Number 整个浏览器大小
+       *
+       * - document.body.clientHeight // => Number  页面实际高度
+       * - document.body.clientWidth // => Number  页面实际宽度
+       **/
+      function windowSize() {
+        console.log(window.innerHeight, window.innerWidth);
+        console.log(window.outerHeight, window.outerWidth);
+        console.log(document.body.clientHeight, document.body.clientWidth);
+        console.log(
+          document.documentElement.clientHeight,
+          document.documentElement.clientWidth
+        );
+      }
+
+      /**
+       * 关于 视口位置
+       * - 查询
+       *  - scrollY // => Number 滚动条Y位置
+       *  - scrollX // => Number 滚动条X位置
+       * - 设置
+       *  - scrollTo(x,y) // 滚动条到 x ，y 位置
+       *  - scrollBy(x,y) // 滚动条 位置 = x + 当前位置 ，y + 当前位置
+       *  - 另一种 参数形式 可以是一个对象，最后一项可以传入 ： behavior:auto|smooth|instant
+       **/
+      function scroll() {
+        console.log(window.scrollY);
+        console.log(window.scrollX);
+      }
+      function scrollToFun() {
+        window.scrollBy(100, 100);
+        setTimeout(() => {
+          window.scrollTo({
+            top: '100',
+            left: '100',
+            behavior: 'smooth'
+          });
+        }, 1000);
+      }
+      // scrollTo()
+
+      // 对话框
+      /**
+       * 对话框
+       * window.alert()
+       * window.confirm()
+       * window.prompt()
+       **/
+      function alertlist() {
+        window.alert();
+        window.confirm();
+        window.prompt();
+      }
+      // 导航
+      /**
+       * 打开 和 关闭
+       * - window.open(strUrl,strWindowName,strWindowFeatures)
+       * - window.close()
+       **/
+      function openNew() {
+        const newWindow = window.open('https://www.baidu.com');
+        setTimeout(() => {
+          newWindow.close();
+        }, 1000);
+      }
+      /**
+       * 更改域名方案
+       * location.assign(url); -> 有后退
+       * window.location = url; -> 有后退
+       * window.location.replace(url) ->没有后退
+       * location.reload(Boolean) -> 刷新本页面
+       */
+
+      /**
+       * 关于 Location
+       * location.href  // => http://www.wrox.com:80/WileyCDA/?q=javascript#contents  完整域名
+       * location.hash // => #xxx URL散列值
+       * location.host // => www.wrox.com:80 域名+端口
+       * location.origin  // => http://www.wrox.com  URL的源地址
+       * location.hostname // => www.wrox.com 域名
+       * location.pathname // => /WileyCDA/ 路径
+       * location.port // => http 协议
+       * location.search // =>  ?q=javascript  参数
+       **/
+      function logLocation() {
+        console.log(location);
+      }
+      /**
+       *  history
+       * - 导航 跳转指定
+       *  - history.go(Number) -> 跳转到第几页
+       *  - history.go(String) -> 跳转到String域名页
+       * - 前进与后退
+       *  - history.back() -> 后退
+       *  - history.forward() -> 前进
+       * - 数量
+       *  - history.length -> Number 一共多少页
+       **/
+      function history(){
+        history.go(10)
+        history.go('http://www.baidu.com')
+        history.back()
+        history.forward()
+        history.length
+      }
+      /**
+       * 关于 窗口关系
+       * - window.parent 当前窗口 的父窗口
+       * - window.top 最上层窗口
+       * - window.self 当前窗口
+       **/
+      function relation() {
+        console.log(window.parent);
+        console.log(window.top);
+        console.log(window.self);
+      }
+      /**
+       * 关于窗口移动 (仅的js打开的窗口有效)
+       * - window.moveTo(x,y) 移动到 x,y
+       * - window.moveBy(width,height) 向右移动 width 向下移动 height
+       **/
+      function move() {
+        window.moveTo(10, 10);
+      }
+
+      /**
+       * 窗口缩放 （只针对被打开网页）
+       * - resizeTo(width,height) // => 将窗口缩放到 width , height
+       * - resizeBy(width,height) // => 将窗口缩放 width , height
+       **/
+      function resize() {
+        window.resizeTo(100, 100);
+        window.resizeBy(100, 100);
+      }
+    </script>
+  </body>
+</html>
