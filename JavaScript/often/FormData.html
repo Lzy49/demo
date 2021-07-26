@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FormData</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 关于 FormData() 的一些操作
+       * - 方法
+       *  - append('key','value') // => 添加
+       *  - delete('key') // => 删除
+       *  - get('key') // => 获取值
+       *  - getAll('key') // => 获取所有值
+       *  - has('key') // => 是否存在
+       *  - set('key','value') // => 设置值
+       *
+       *  - keys() // => 所有key
+       *  - entries // => 迭代器
+       */
+      const formData = new FormData();
+      formData.set('key', 'value');
+      console.log(formData.get('key'));
+      formData.set('key2', new Blob());
+      formData.append('key2', 'name');
+      console.log(formData.getAll('key2'));
+      console.log(formData.has('key2'))
+      formData.delete('key2');
+      console.log(formData.has('key2'))
+      console.log(Array.from(formData.keys()));
+      console.log(Array.from(formData.entries()))
+    </script>
+  </body>
+</html>

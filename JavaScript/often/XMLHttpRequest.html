@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XMLHttpRequest</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * XMLHttpRequest
+       * - 创建一个实例 new XMLHttpRequest();
+       * - 属性
+       *  - readyState 状态 0:'未初始化',1:'已打开',2:'已发送',3:'接收中',4:'完成'
+       *  - responseText 响应内容
+       *  - status 响应状态码
+       *  - timeout 超时
+       *  - onprogress = function() // 事件检测进度。 （ 必须是异步）
+       *  - onreadystatechange  = function() // 只要 readyState 属性发生变化
+       * - 方法
+       *  - open('method','url','isAsync') // 发送一个请求
+       *  - send(String) // 发送请求体 如果没有 传入 null
+       *  - abort() // 取消异步请求
+       *  - setRequestHeader(key,value) // 设置请求头部信息
+       *  - getResponseHeader(key) // 获取单个响应头
+       *  - getAllResponseHeaders() // 获取响应头
+       **/
+      const states = ['未初始化', '已打开', '已发送', '接收中', '完成'];
+      function log(xhr) {
+        console.log(`%c当前状态${states[xhr.readyState]}`, 'color:red');
+      }
+      const xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function (realt) {
+        log(xhr);
+        console.log('发生改变');
+        if (xhr.readyState == 4) {
+          console.log('响应头', xhr.getAllResponseHeaders());
+          if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            console.log(xhr.responseText);
+          } else {
+            alert('Request was unsuccessful: ' + xhr.status);
+          }
+        }
+      };
+      xhr.onprogress = function (res) {
+        console.log('当前进度', res.loaded, res.total);
+      };
+      log(xhr);
+      xhr.open(
+        'post',
+        'http://rap2api.taobao.org/app/mock/246403/getList',
+        true
+      );
+      xhr.setRequestHeader('token', 'ooo');
+      xhr.send(JSON.stringify({ name: 123 }));
+      console.log('头部信息', xhr.getAllResponseHeaders()); // 获取头部信息
+    </script>
+  </body>
+</html>
