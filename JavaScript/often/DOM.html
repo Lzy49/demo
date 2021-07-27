@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" class="html">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body class="body">
+    <div>1</div>
+    <div id="root" class="root" name="root" title="rootTitle">
+      <div>2</div>
+      <div>3</div>
+    </div>
+    <div>4</div>
+    <div>5</div>
+    <script>
+      // 1. 获取 DOM 
+      // 1.1 获取指定DOM
+      function getDOM() {
+        /*
+            1.1 DOM 选择器
+            - document.getElementById('') // 通过id 寻找DOM
+            - document.getELementByClassName() // 通过 class 寻找DOM
+            - document.getElementByTagName() // 通过标签名 寻找DOM
+            - document.querySelector() // 通过 css 选择器选择DOM 返回第一个 DOM
+            - document.querySelectorAll() // 通过 css 选择 DOM 返回一个 list
+          */
+        console.log(document.getElementById('root'));
+        console.log(document.getElementsByClassName('root'));
+        console.log(document.getElementsByTagName('div'));
+        console.log(document.getElementsByName('root'));
+        console.log(document.querySelector('#root'));
+        console.log(document.querySelectorAll('div'));
+      }
+      // 1.2 通过内置属性获取 DOM
+      function getOnlyDOM() {
+        /*
+            1.2 内置的一些 可获取 DOM 的属性
+            - document.doctype // 获取 DOCTYPE 申明DOM
+            - document.documentElement // 获取 HTML DOM
+            - document.head
+            - document.body // 获取 body DOM
+          */
+        console.log(document.doctype);
+        console.log(document.documentElement);
+        console.log(document.head);
+        console.log(document.body);
+      }
+      // 1.3 获取 DOM 树
+      function getDOMTree() {
+        /*
+            1.3 内置的 DOM树
+            - document.childNodes // DOM 树
+          */
+        console.log(document.childNodes);
+      }
+      // 2 NodeList 的一些方法 
+      function nodelist() {
+        /*
+          2 NodeList 的一些方法
+          - length 个数
+          - item 用 index 找 item
+          - namedItem 用 name 找 item
+          - [number|string] 找 item
+          */
+        const list = document.getElementsByTagName('div');
+        console.log(list.length);
+
+        console.log(list[0]);
+        console.log(list['root']);
+
+        console.log(list.item(0));
+        console.log(list.namedItem('root'));
+      }
+      // 3 创建 Node
+      function createDOM() {
+        /*
+            3 创建 DOM
+            - 创建HTMLDOM节点 createElement('tag')
+            - 创建TextDOM节点 createTextNode('text')
+          */
+        const htmlDOM = document.createElement('div');
+        htmlDOM.innerHTML = '你好2';
+        const textDOM = document.createTextNode('你好呀3');
+        document.body.append(htmlDOM, textDOM);
+      }
+      // 4 document 的其他一些 property
+      function documentProperties() {
+        /*
+          - document.createDocumentFragment() 创建一个空的Node组 , 可以给他添加很多子Node然后将其直接推入页面减少Node刷新
+          - importNode(Node,Boolean) 克隆一个 Node 接收两个参数 第一个表示要克隆的Node，第二个表示是否深克隆（克隆里面的子Node）
+          - title 页面标题内容
+        */
+        {
+          const nodeList = document.createDocumentFragment();
+        }
+        {
+          const node = document.importNode(
+            document.querySelector('#root'),
+            true
+          );
+          document.body.append(node);
+        }
+        {
+          console.log(document.title);
+        }
+      }
+      // 5 Node 的一些方法
+      function nodeFunctions() {
+        /*
+          5 DOM 工具方法
+          - matches DOM 校验 
+        */
+        console.log(document.querySelector('.root').matches('#root'));
+      }
+      //6 Node 的 property
+      // 获取，增加，删除，修改，克隆，合并
+      function nodeProperties1() {
+        const node = document.querySelector('#root');
+        /*
+          6.1 获取 相关节点（节点包含文本，注释，DOM)
+          - 父级
+            - parentNode // 父节点
+          - 同级
+            - nextSibling // 下一个兄弟节点 （有可能是 text 节点）
+            - previousSibling // 上一个兄弟节点
+          - 子级
+            - childNodes // 所有子节点
+            - fristNode // 第一个子节点
+            - lastNode // 最后一个子节点
+            - hasChildNodes() // 是否有子节点
+        */
+        console.log(node.parentNode); // 父节点
+        console.log(node.previousSibling); // 上一个兄弟节点
+        console.log(node.nextSibling); // 下一个兄弟节点
+        console.log(node.childNodes); // 所有子节点
+        console.log(node.firstChild); // 第一个子节点
+        console.log(node.lastChild); // 最后一个子节点
+        console.log(node.hasChildNodes()); // 是否有子节点
+        /*
+          6.2 获取 相关 Element 节点
+          - 同级
+            - previousElementSibling 上一个 兄弟 节点
+            - nextElementSibling 下一个 兄弟 节点
+          - 子级
+            - childElementCount // 所有 Element 节点个数 （ 不包括 text 和 注释的节点）
+            - children // 所有 Element 节点
+            - firstChildren // 第一个 子 Element 节点
+            - lastChildren // 最后一个 子 Element 节点
+            - contains(dom) // 判断节点是不是 该节点的子节点
+        */
+        console.log(node.previousElementSibling); // 上一个 兄弟 节点
+        console.log(node.nextElementSibling); // 下一个 兄弟 节点
+        console.log(node.children); // 所有子节点
+        console.log(node.childElementCount); // 子节点数量
+        console.log(node.firstElementChild); // 第一个 子 Element 节点
+        console.log(node.lastElementChild); // 最后一个 子 Element 节点
+        console.log(node.contains(node.firstElementChild)); // 判断传入节点是否是 该节点的子节点
+
+        /*
+          6.3 添加/移动 子 节点 （如果Node 已存在则是移动，否则是 添加）
+          - append 添加或移动Node
+          - insertBefore(newNode,positionNode ) // 在 positionNode 前添加Node 或 移动Node
+        */
+        node.append(node.nextElementSibling); // 移动 node 的 下一个兄弟节点到 他的子节点中
+        {
+          const childNode = document.createElement('div');
+          childNode.innerText = '别担心';
+          node.append(childNode); // 添加一个新节点 到子节点中
+          node.insertBefore(node.nextElementSibling, node.lastElementChild); // 移动 node 的 下一个兄弟节点到 他的子节点中
+          node.insertBefore(
+            document.createElement('input'),
+            node.lastElementChild
+          );
+        }
+        /*
+          6.4 替换 子 Node (如果 要替换的 Node 已存在则移动。被替换的Node会被移除)
+          - replaceChild(newNode,oldNode) // 用newNode 替代 oldNode
+        */
+        {
+          node.replaceChild(node.lastElementChild, node.firstElementChild);
+        }
+        /*
+          6.5 删除 子 Node
+          - removeChild
+        */
+        node.removeChild(node.lastElementChild); // 删除最后一个节点
+        /*
+          6.6 克隆当前Node
+          - cloneNode
+        */
+        node.append(node.cloneNode(true));
+        /*
+          6.7 合并 Node （textNode)
+          - normalize()
+        */
+        {
+          const textNodeList = [
+            document.createTextNode('1'),
+            document.createTextNode('1'),
+            document.createTextNode('1')
+          ];
+          const list = document.createDocumentFragment();
+          textNodeList.forEach((item) => list.append(item));
+          node.append(list);
+          console.log(node.childNodes.length); // 11
+          node.normalize();
+          console.log(node.childNodes.length); // 9
+        }
+      }
+      //6 Node 的 property
+      nodeProperties2();
+      function nodeProperties2() {
+        /*
+          6.8 node 的一些属性
+          - id id 
+          - childName clas名称
+          - tagName 标签名称
+          - title 标题
+          - name
+          - nodeType node类型
+        */
+        const node = document.querySelector('#root');
+        console.log(node.id);
+        console.log(node.className);
+        console.log(node.title)
+
+        console.log(node.tagName);
+        console.log(node.nodeName)
+
+        console.log(node.nodeType);
+      }
+    </script>
+  </body>
+</html>
