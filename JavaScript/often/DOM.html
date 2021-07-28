@@ -4,28 +4,35 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>DOM 相关知识复习</title>
   </head>
   <body class="body">
     <div>1</div>
-    <div id="root" class="root" name="root" title="rootTitle">
-      <div>2</div>
+    <div
+      id="root"
+      class="root"
+      name="root"
+      title="rootTitle"
+      data-name="dataName"
+      style="color: blue; font-size: 20px !important"
+    >
+      <div name="childName">2</div>
       <div>3</div>
     </div>
     <div>4</div>
     <div>5</div>
     <script>
-      // 1. 获取 DOM 
+      // 1. 获取 DOM
       // 1.1 获取指定DOM
       function getDOM() {
         /*
-            1.1 DOM 选择器
-            - document.getElementById('') // 通过id 寻找DOM
-            - document.getELementByClassName() // 通过 class 寻找DOM
-            - document.getElementByTagName() // 通过标签名 寻找DOM
-            - document.querySelector() // 通过 css 选择器选择DOM 返回第一个 DOM
-            - document.querySelectorAll() // 通过 css 选择 DOM 返回一个 list
-          */
+          1.1 DOM 选择器
+          - document.getElementById('') // 通过id 寻找DOM
+          - document.getELementByClassName() // 通过 class 寻找DOM
+          - document.getElementByTagName() // 通过标签名 寻找DOM
+          - document.querySelector() // 通过 css 选择器选择DOM 返回第一个 DOM
+          - document.querySelectorAll() // 通过 css 选择 DOM 返回一个 list
+        */
         console.log(document.getElementById('root'));
         console.log(document.getElementsByClassName('root'));
         console.log(document.getElementsByTagName('div'));
@@ -36,12 +43,12 @@
       // 1.2 通过内置属性获取 DOM
       function getOnlyDOM() {
         /*
-            1.2 内置的一些 可获取 DOM 的属性
-            - document.doctype // 获取 DOCTYPE 申明DOM
-            - document.documentElement // 获取 HTML DOM
-            - document.head
-            - document.body // 获取 body DOM
-          */
+          1.2 内置的一些 可获取 DOM 的属性
+          - document.doctype // 获取 DOCTYPE 申明DOM
+          - document.documentElement // 获取 HTML DOM
+          - document.head
+          - document.body // 获取 body DOM
+        */
         console.log(document.doctype);
         console.log(document.documentElement);
         console.log(document.head);
@@ -55,7 +62,7 @@
           */
         console.log(document.childNodes);
       }
-      // 2 NodeList 的一些方法 
+      // 2 NodeList 的一些方法
       function nodelist() {
         /*
           2 NodeList 的一些方法
@@ -76,46 +83,64 @@
       // 3 创建 Node
       function createDOM() {
         /*
-            3 创建 DOM
-            - 创建HTMLDOM节点 createElement('tag')
-            - 创建TextDOM节点 createTextNode('text')
-          */
+          3.1 创建 DOM
+          - 创建HTMLDOM节点 createElement('tag')
+          - 创建TextDOM节点 createTextNode('text')
+        */
         const htmlDOM = document.createElement('div');
         htmlDOM.innerHTML = '你好2';
         const textDOM = document.createTextNode('你好呀3');
         document.body.append(htmlDOM, textDOM);
-      }
-      // 4 document 的其他一些 property
-      function documentProperties() {
         /*
+          3.2 创建空node 组
           - document.createDocumentFragment() 创建一个空的Node组 , 可以给他添加很多子Node然后将其直接推入页面减少Node刷新
-          - importNode(Node,Boolean) 克隆一个 Node 接收两个参数 第一个表示要克隆的Node，第二个表示是否深克隆（克隆里面的子Node）
-          - title 页面标题内容
         */
-        {
-          const nodeList = document.createDocumentFragment();
-        }
-        {
-          const node = document.importNode(
-            document.querySelector('#root'),
-            true
-          );
-          document.body.append(node);
-        }
-        {
-          console.log(document.title);
-        }
+        const nodeList = document.createDocumentFragment();
       }
-      // 5 Node 的一些方法
+      nodeFunctions();
+      // 4 document 写入 的一些方法
       function nodeFunctions() {
         /*
-          5 DOM 工具方法
-          - matches DOM 校验 
+          4.1 write 写入
+          - writeln 写入文本/DOM并且添加一个换行
+          - write 只写入文本/DOM
         */
-        console.log(document.querySelector('.root').matches('#root'));
+        document.writeln('nihao');
+        document.write('你好<input>');
+      }
+      // 5 document 的其他一些 property
+      documentProperties();
+      function documentProperties() {
+        /*
+          5.1 属性
+          - title 页面标题内容
+          - URL 完整url
+          - domain 域名
+          - readyState 加载状态 loading|complete
+          - compatMode 文档渲染模式 CSS1Compat|BackCompat
+          - characterSet 字符集
+          - activeElement 当前聚焦的dom
+        */
+        {
+          console.log(document.title);
+          console.log(document.URL);
+          console.log(document.domain);
+          console.log(document.readyState);
+          console.log(document.compatMode);
+          console.log(document.characterSet);
+          console.log(document.activeElement);
+        }
+        /*
+          5.2 方法
+          - importNode(Node,Boolean) 克隆一个 Node 接收两个参数 第一个表示要克隆的Node，第二个表示是否深克隆（克隆里面的子Node）
+          - hasFocus()  当前页面是否聚焦
+        */
+        const node = document.importNode(document.querySelector('#root'), true);
+        document.body.append(node);
+        console.log(document.hasFocus());
       }
       //6 Node 的 property
-      // 获取，增加，删除，修改，克隆，合并
+      // 获取 node ，增加 node ，删除 node ，修改 node ，克隆 node ，合并 node
       function nodeProperties1() {
         const node = document.querySelector('#root');
         /*
@@ -157,7 +182,6 @@
         console.log(node.firstElementChild); // 第一个 子 Element 节点
         console.log(node.lastElementChild); // 最后一个 子 Element 节点
         console.log(node.contains(node.firstElementChild)); // 判断传入节点是否是 该节点的子节点
-
         /*
           6.3 添加/移动 子 节点 （如果Node 已存在则是移动，否则是 添加）
           - append 添加或移动Node
@@ -210,27 +234,180 @@
         }
       }
       //6 Node 的 property
-      nodeProperties2();
+      // 获取 node 的一些 attribute
+      nodeProperties5();
       function nodeProperties2() {
         /*
           6.8 node 的一些属性
-          - id id 
+          - id id
           - childName clas名称
           - tagName 标签名称
           - title 标题
           - name
           - nodeType node类型
+          - nodeValue 文字内容（仅 textNode有）
+          - dataset 节点上所有 data- 属性
         */
         const node = document.querySelector('#root');
         console.log(node.id);
         console.log(node.className);
-        console.log(node.title)
+        console.log(node.title);
 
         console.log(node.tagName);
-        console.log(node.nodeName)
+        console.log(node.nodeName);
 
         console.log(node.nodeType);
+        console.log(node.dataset);
+        const textNode = node.firstElementChild.childNodes[0];
+        console.log(textNode.nodeValue);
+        /*
+          6.9 node 的 attributes 属性
+          - attributes 包含了所有的 attribute 和一些方法
+            - getNamedItem('tag')  返回 tag=value
+            - [tag] 返回 tag=value
+        */
+        const attributes = node.attributes;
+        console.log(attributes['name']);
+        console.log(attributes.getNamedItem('name'));
+        /*
+          6.10 node 关于 attribute 的方法
+          - getAttribute(tag) 获取 tag 对应的属性
+          - setAttribute(tag,value) 设置 tag 对应的属性 为 value
+          - removeAttribute(tag) 删除 tag 对应的属性
+        */
+        console.log(node.getAttribute('name'));
+        node.removeAttribute('name');
+        console.log(node.getAttribute('name'));
+        node.setAttribute('name', 'newName');
+        console.log(node.getAttribute('name'));
+      }
+      // 关于 样式 的操作
+      function nodeProperties3() {
+        /*
+          6.11 node 关于 class 的操作
+          - classList // 所有的class
+          - classList.add('className') 添加 className
+          - classList.contains('className') 判断 className 是否存在
+          - classList.remove('className') 删除 className
+          - classList.toggle('className') 判断 className 如果存在则删除，如果不存在则添加
+        */
+        const node = document.querySelector('#root');
+        const classList = node.classList;
+        classList.add('color');
+        console.log(classList.contains('color'));
+        classList.remove('root');
+        classList.toggle('root');
+        /*
+          6.12 style 操作
+          - 获取
+            - node.style
+          - 属性
+            - node.style.cssText  style 字符串
+            - node.style.length 有几个样式
+          - 方法
+            - node.style.getPropertyPriority('cssTage') 返回 node css 的优先级
+            - node.style.getPropertyValue('cssTag') 返回 node css 的值
+            - node.style.item('cssTag') 返回 node css 的值
+            - node.style.removeProperty('cssTag') 删除 node css
+            - node.style.setProperty('cssTag','cssValue','isImportant') 设置 css 属性
+        */
+        const styles = node.style;
+        console.log(styles.cssText);
+        console.log(styles.length);
+        console.log(styles.getPropertyPriority('color'));
+        console.log(styles.getPropertyPriority('font-size'));
+        console.log(styles.getPropertyValue('color'));
+        console.log(styles.item('color'));
+        styles.removeProperty('color');
+        styles.setProperty('font-size', '30px', 'important');
+        /*
+          全局方法
+          - getComputedStyle(node) // 抛出所有样式
+        */
+        console.log(getComputedStyle(node));
+      }
+      // 获取 node 的偏移量
+      function nodeProperties4() {
+        /*
+          6.13 node 关于偏移量的 property
+          - offset 内容+内边距+边框+滚动条
+            - offsetHeight 高
+            - offsetWidth 宽
+            - offsetLeft 离参考左侧距离
+            - offsetTop 离参考上侧距离
+            - offsetParent 参考
+          - client 内容+内边距
+            - clientTop   离参考上侧距离
+            - clientLeft  离参考左侧距离
+            - clientHeight 高
+            - clientWidth 宽
+          - scroll 内容+内边距+益处尺寸
+            - scrollHeight 高
+            - scrollWidht 宽
+            - scrollTop 距离上侧距离
+            - scrollLeft 距离左侧距离
+        */
+        const node = document.querySelector('#root');
+        console.log(node.offsetHeight);
+        console.log(node.offsetWidth);
+        console.log(node.offsetLeft);
+        console.log(node.offsetTop);
+        console.log(node.offsetParent);
+
+        console.log(node.clientWidth);
+        console.log(node.clientHeight);
+        console.log(node.clientTop);
+        console.log(node.clientLeft);
+
+        console.log(node.scrollWidth);
+        console.log(node.scrollHeight);
+        console.log(node.scrollLeft);
+        console.log(node.scrollTop);
+      }
+      // node 写入
+      function nodeProperties5() {
+        /*
+          6.14.1 贴入文本
+          - innerText 抹掉所有子内容 贴入 传入内容
+          - outerText 抹掉当前 node 贴入传入内容
+        */
+        const node = document.querySelector('#root');
+        node.innerText = '你好<input>';
+        // node.outerText = '你好呀<input>'
+        /*
+          6.14.2 贴入Node
+          - innerHTML 抹掉所有子内容 贴入 传入内容
+          - outerHTML 抹掉当前 node 贴入 传入内容
+        */
+        node.innerHTML = '你好<input>';
+        // node.outerHTML = '你好<input>';
+        /* 
+          6.14.3 insertAdjacent
+          - insertAdjacentHTML(position,Node) 在 node 的 position 贴如 Node (ElementDOM)
+          - insertAdjacentText(position,Node) 在 node 的 position 贴如 Node (textNode)
+          - position 
+            - beforebegin 插入当前元素前面，作为前一个同胞节点； 
+            - afterbegin 插入当前元素内部，作为新的子节点或放在第一个子节点前面；
+            - beforeend 插入当前元素内部，作为新的子节点或放在最后一个子节点后面；
+            - afterend ，插入当前元素后面，作为下一个同胞节点。
+          */
+        node.insertAdjacentHTML('beforebegin', '<input>');
+        node.insertAdjacentText('afterend', '<input>');
+      }
+
+      // node 的一些其他方法
+      function nodeProperties6() {
+        /*
+          - matches(cssChoice) 判断 DOM是否可以通过 cssChoice 选中
+        */
+        const node = document.getElementById('root');
+        console.log(node.matches('#root'));
       }
     </script>
+    <style>
+      .color {
+        color: red;
+      }
+    </style>
   </body>
 </html>
