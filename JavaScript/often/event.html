@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>事件</title>
+  </head>
+  <body>
+    <div id="target-box"></div>
+    <script>
+      const box = document.querySelector('#target-box');
+      // 1. 事件挂载
+      function addEvent() {
+        // 1.1 直接写在HTML的DOM上
+        box.insertAdjacentHTML(
+          'beforeend',
+          `<button id="button" onclick="console.log('直接写在DOM上')">直接写在DOM上</button>`
+        );
+        // 1.2 修改 node 的 property
+        const item1 = document.createElement('button');
+        item1.innerText = '修改 node property';
+        item1.onclick = function () {
+          console.log('修改 node property');
+        };
+        box.append(item1);
+        // 1.3 使用 addEventListener 绑定
+        const item2 = document.createElement('button');
+        const clickfunction = function (event) {
+          console.log('使用 addEventListener 添加事件');
+        };
+        item2.addEventListener('click', clickfunction, true);
+        item2.innerText = '使用 addEventListener 绑定';
+        box.append(item2);
+        // 为 卸载 事件做的一些便利。
+        return { item1, item2, clickfunction };
+      }
+      // 2. 事件卸载
+      function removeEvent() {
+        const { item1, item2, clickfunction } = addEvent();
+        const removeButton = document.createElement('button');
+        removeButton.innerText = 'removeEvent';
+        removeButton.onclick = function () {
+          // 2.1 卸载 node 的 property
+          document.getElementById('button').onclick = null;
+          item1.onclick = null;
+          // 2.2 卸载 使用 addEventListener 绑定的事件
+          // - 接收 3个 参数 ：（事件名，事件函数，是否设置为捕捉（默认冒泡））
+          item2.removeEventListener('click', clickfunction, true);
+        };
+        box.append(removeButton);
+      }
+      // 3. event
+      function event() {
+        const button1 = document.createElement('button');
+        button1.innerText = '基础属性';
+        box.append(button1);
+        box.addEventListener(
+          'click',
+          (event) => {
+            /*
+              3.1 event 基础属性
+              - type -> String 事件类型
+              - bubbles -> Boolean 是否冒泡
+              - cancelable -> Boolean 是否可以取消事件的默认行为
+              - eventPhase -> 0|1|2|3 目前阶段 (无处理 | 捕捉 | 当前 | 冒泡 )
+              - detail -> Number 事件相关的其他信息
+              - target -> DOM 事件目标 (促发)
+              - currentTarget -> DOM 当前事件处理程序所在的元素 （绑定）
+            */
+            console.log('type', event.type);
+            console.log('bubbles', event.bubbles);
+            console.log('cancelable', event.cancelable);
+            console.log('currentTarget', event.currentTarget);
+            console.log(
+              'eventPhase',
+              event.eventPhase,
+              ['无处理', '捕捉', 'target === currentTarget', '冒泡'][
+                event.eventPhase
+              ]
+            );
+            console.log('target', event.target);
+            console.log('detail', event.detail);
+            /*
+              3.2 event 特殊属性 - 鼠标，滚轮事件
+              - clientX ,  clientY 光标在视口位置
+              - pageX , pageY 光标在页面位置
+              - screenX , screenY 光标在整个屏幕的位置
+              - button 按下键(0,1,2)->(左中右)
+            */
+            const { clientX, clientY, pageX, pageY, button } = event;
+            console.log('光标在视口位置', clientX, clientY);
+            console.log('光标在页面位置', pageX, pageY);
+            console.log('按键是', ['左', '中', '右'][button]);
+          },
+          true
+        );
+        const scrollBox = document.createElement('div');
+        scrollBox.classList.add('scollBox');
+        scrollBox.insertAdjacentHTML('beforeend', '<div>内容</div>');
+        box.append(scrollBox);
+        scrollBox.addEventListener('mousewheel', function (event) {
+          /*
+            3.3 event 特殊属性 - 滚轮事件
+            - wheelDelta 滚动值
+          */
+          const { wheelDelta } = event;
+          console.log('这次滚动了', wheelDelta);
+        });
+        const input = document.createElement('textarea');
+        input.addEventListener('keydown', function (event) {
+          /*
+            3.4 event 特殊属性 - 键盘
+            - keyCode 键位 code
+            - key 键位 名称（支持度不高）
+          */
+          const { keyCode, key } = event;
+          console.log(keyCode, key);
+          /*
+            3.5 evnet 特殊属性 多按键 联动
+            - shiftKey
+            - ctrlKey
+            - altKey
+            - metaKey (apple command)
+          */
+          const keyName = ['shift', 'ctrl', 'alt', 'meta'];
+          const keys = keyName.reduce((result, value, key, arr) => {
+            result += event[value + 'Key'] ? ' ' + value : '';
+            return result;
+          }, '');
+          console.log('当前 按键 有' + keys);
+        });
+        /*
+          3.6 textInput 特殊属性
+          - data 要输入的内容
+        */
+        input.addEventListener('textInput', function (event) {
+          console.log('textInput', event.data);
+        });
+        document.body.append(input);
+
+        const touchBox = document.createElement('div');
+        touchBox.classList.add('touchBox');
+        /*
+          3.7 触摸特殊事件
+          - touches : Touch对象的数组，表示当前屏幕上的每个触点。
+          - targetTouches : Touch对象的数组，表示特定于事件目标的触点。
+          - changedTouches : Touch对象的数组，表示自上次用户动作之后变化的触点。
+        */
+        touchBox.addEventListener(
+          'touchmove',
+          function (event) {
+            console.log(event.touches); // Touch对象的数组，表示当前屏幕上的每个触点。
+            console.log(event.targetTouches); // Touch对象的数组，表示特定于事件目标的触点。
+            console.log(event.changedTouches); // Touch对象的数组，表示自上次用户动作之后变化的触点。
+          },
+          true
+        );
+        document.body.append(touchBox);
+        const functionBox = document.createElement('div');
+        functionBox.classList.add('a-box');
+        functionBox.addEventListener('click', function (e) {
+          console.log('当前点我的是', e.target);
+        });
+        const aElement = document.createElement('a');
+        aElement.href = 'https://www.baidu.com';
+        aElement.innerHTML = '点击我跳不走但促发后续事件';
+        aElement.addEventListener('click', function (event) {
+          /*
+             3.8 event 方法
+             - preventDefault()  -> 阻止 node 调用默认事件
+             - stopImmediatePropagation() -> 阻止 node 调用其他绑定事件
+             - stopPropagation() -> 阻止 node 冒泡
+          */
+          event.preventDefault();
+          event.stopPropagation();
+          event.stopImmediatePropagation();
+        });
+        aElement.addEventListener('click', function (event) {
+          console.log('我是第二个事件');
+        });
+        functionBox.append(aElement);
+        document.body.append(functionBox);
+      }
+      // 4. 事件类型
+      // 4.1 用户界面事件
+      function eventType1() {
+        /*
+          4.1 用户界面事件
+          - (window|img|body).load DOM加载
+          - DOMContentLoaded dom 加载后就执行
+          - (window|img|body).unload 页面卸载
+          - error 拦截报错
+          - DOM.select DOM 可以是 input/textarea ，当选中其中内容时促发事件
+          - resize 窗口发生改变时执行
+          - scroll 滚动条滚动时执行
+        */
+        // (window|img|body).load DOM加载
+        document.body.onload = function (evet) {
+          console.log('body 加载完毕执行');
+        };
+        // DOMContentLoaded dom 加载后就执行
+        document.addEventListener('DOMContentLoaded', function (event) {
+          console.log('DOM 加载完备执行');
+        });
+        // (window|img|body).unload 页面卸载
+        window.addEventListener('unload', function (event) {
+          console.log('页面被卸载了');
+        });
+        // error 拦截报错
+        window.addEventListener('error', function (e) {
+          console.log('拦截报错', e.error);
+          e.preventDefault();
+        });
+        // DOM.select DOM 可以是 input/textarea ，当选中其中内容时促发事件
+        const input = document.createElement('input');
+        input.addEventListener('select', function (e) {
+          console.log('文字被选中选中', e);
+        });
+        document.body.append(input);
+        // resize 窗口发生改变时候执行
+        window.addEventListener('resize', function () {
+          console.log(
+            'window 窗口大小被改变执行',
+            document.body.offsetWidth,
+            document.body.offsetHeight
+          );
+        });
+        // scroll 滚动条滚动执行
+        const scrollBox = document.createElement('div');
+        scrollBox.classList.add('scollBox');
+        scrollBox.insertAdjacentHTML('beforeend', '<div>内容</div>');
+        document.body.append(scrollBox);
+        scrollBox.addEventListener('scroll', function (e) {
+          console.log('scroll', e);
+        });
+      }
+      // 4.2 焦点事件
+      function eventType2() {
+        /*
+          - dom.blur 失去焦点，不冒泡
+          - dom.focusout 失去焦点，冒泡
+          - dom.focus 得到焦点，不冒泡
+          - dom.focusin 得到焦点 冒泡
+        */
+        box.addEventListener('focusout', function () {
+          console.log('box');
+        });
+        const input = document.createElement('input');
+        input.addEventListener('blur', function () {
+          console.log('blur 失去焦点，不冒泡');
+        });
+        input.addEventListener('focus', function () {
+          console.log('focus 得到焦点，不冒泡');
+        });
+        input.addEventListener('focusout', function () {
+          console.log('focusout 失去焦点，冒泡');
+        });
+        input.addEventListener('focusin', function () {
+          console.log('focusin 得到焦点 冒泡');
+        });
+        box.append(input);
+      }
+
+      // 4.3 鼠标和滚轮事件
+      function eventType3() {
+        const div = document.createElement('div');
+        div.style.width = '200px';
+        div.style.height = '200px';
+        div.style.background = '#ddd';
+        /*
+          4.3.1 按键
+          click 左键单击
+          dblclick 左键双击
+          mousedown 任意键移动
+          mouseup 放开鼠标按键
+          顺序：mousedown -> mouseup -> click -> mousedown -> mouseup -> click -> dblclick
+        */
+        div.addEventListener('click', function (e) {
+          console.log('click 左键点击事件');
+        });
+        div.addEventListener('dblclick', function (e) {
+          console.log('dbclick 左键双击');
+          e.preventDefault();
+        });
+        div.addEventListener('mousedown', function (e) {
+          console.log('mousedown 任意键移动');
+        });
+        div.addEventListener('mouseup', function (e) {
+          console.log('mouseup 放开鼠标按键');
+        });
+        /*
+          4.3.2 移动
+          - mouseenter 移入
+          - mouseleave 移出
+          - mouseover 移入 冒泡
+          - mouseout 移出 冒泡
+        */
+        div.addEventListener('mouseenter', function (e) {
+          console.log('mouseenter');
+        });
+        div.addEventListener('mouseleave', function (e) {
+          console.log('mouseleave');
+        });
+        div.addEventListener('mouseout', function () {
+          console.log('mouseout');
+        });
+        div.addEventListener('mouseover', function () {
+          console.log('mouseover');
+        });
+        box.addEventListener('mouseout', function () {
+          console.log('box');
+        });
+        box.append(div);
+        /*
+          4.3.3 滚动条滚动事件
+          - mousewheel 滚动事件
+        */
+        const scrollBox = document.createElement('div');
+        scrollBox.classList.add('scollBox');
+        scrollBox.insertAdjacentHTML('beforeend', '<div>内容</div>');
+        document.body.append(scrollBox);
+        scrollBox.addEventListener('mousewheel', function (event) {
+          console.log('这次滚动了', event.wheelDelta);
+        });
+      }
+      // 4.4 键盘与输入事件
+      function eventType4() {
+        const input = document.createElement('input');
+        /*
+          4.4.1 键盘与输入事件
+          - keydown 按键按下
+          - keyup 按键松开
+          - textInput 文本插入input前执行
+        */
+        input.addEventListener('keydown', function (e) {
+          console.log('keydown', e.key, e.keyCode);
+        });
+        input.addEventListener('keyup', function (e) {
+          console.log('keyup', e.key, e.keyCode);
+        });
+        input.addEventListener('textInput', function (e) {
+          console.log('textInput', e.data);
+        });
+        /*
+          4.4.2 IME 事件
+          - compositionstart 在IME的文本合成系统打开时触发，表示输入即将开始；
+          - compositionupdate 在新字符插入输入字段时触发；
+          - compositionend 在IME的文本合成系统关闭时触发，表示恢复正常键盘输入。
+        */
+        input.addEventListener('compositionstart', function (e) {
+          console.log('compositionstart', e);
+        });
+        input.addEventListener('compositionend', function (e) {
+          console.log('compositionend', e);
+        });
+        input.addEventListener('compositionupdate', function (e) {
+          console.log('compositionupdate', e);
+        });
+        box.append(input);
+      }
+      // 4.5 手机触摸事件
+      function eventType5() {
+        const div = document.createElement('div');
+        div.style.height = '400px';
+        div.style.width = '400px';
+        div.style.background = 'red';
+        /* 4.5.1 基础
+          - touchstart // 触摸开始
+          - touchmove // 触摸中
+          - touchend // 触摸结束
+          - touchcencel // 被系统删除触摸
+        */
+        div.addEventListener('touchstart', function (e) {
+          console.log('touchstart', e.touches);
+        });
+        div.addEventListener('touchmove', function (e) {
+          console.log('touchmove', e.touches);
+        });
+        div.addEventListener('touchend', function (e) {
+          console.log('touchend', e.touches);
+        });
+        div.addEventListener('touchcencel', function (e) {
+          console.log('touchcencel');
+        });
+        /* 4.5.2 多指 (但是测试了下似乎都不支持)
+          - gesturestart 一个手指已经放在屏幕上，再把另一个手指放到屏幕上时触发。
+          - gesturechange 任何一个手指在屏幕上的位置发生变化时触发。
+          - gestureend 其中一个手指离开屏幕时触发。
+        */
+        div.addEventListener(
+          'gesturestart',
+          function (e) {
+            alert(1);
+            div.innerText = 'gesturestart';
+          },
+          false
+        );
+        div.addEventListener(
+          'gesturechange',
+          function (e) {
+            div.innerText = 'gesturechange';
+          },
+          false
+        );
+        div.addEventListener(
+          'gestureend',
+          function (e) {
+            div.innerText = 'gestureend';
+          },
+          false
+        );
+        box.append(div);
+      }
+      // 4.6 其他事件
+      function eventType6() {
+        /*
+          4.6.1 contextmenu 右键菜单事件
+        */
+        document.body.addEventListener('contextmenu', function (e) {
+          console.log(e);
+          e.preventDefault();
+        });
+        /*
+          4.6.2 hashchange url片段标识符被修改事件
+        */
+        window.addEventListener(
+          'hashchange',
+          function () {
+            console.log('hashchange');
+          },
+          false
+        );
+        /*
+          4.6.3
+          - orientationchange 旋转 （ window.orientation  旋转角度)
+          - devicemotion 重力感应
+        */
+        window.addEventListener('orientationchange', function (e) {
+          console.log('orientationchange');
+        });
+        window.addEventListener('devicemotion', function (e) {
+          box.innerHTML = 'devicemotion'
+        });
+
+      }
+      // 5 模拟事件
+      function MouseEvents(){
+        const btn = document.createElement('button')
+        btn.addEventListener('click',function(e){
+          alert(1)
+        })
+        box.append(btn)
+        // 模拟 鼠标点击
+        // 创建event对象
+        let event = document.createEvent("MouseEvents");
+        // 初始化event对象
+        event.initMouseEvent("click", true, true, document.defaultView,0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        // 触发事件
+        setTimeout(()=>{
+          btn.dispatchEvent(event);
+        },2000)
+        // 模拟键盘 --------------
+        const textbox = document.createElement('input')
+        textbox.addEventListener('keydown',function(){
+          console.log('1')
+        })
+        box.append(textbox)
+        const keyboard = document.createEvent("KeyboardEvent");
+        // 初始化event对象
+        keyboard.initKeyboardEvent("keydown", true, true, document.defaultView, "a",0, "Shift", 0);
+        // 触发事件
+        textbox.dispatchEvent(keyboard);
+      }
+    </script>
+    <style>
+      .a-box a {
+        display: block;
+      }
+      .touchBox {
+        width: 100px;
+        height: 100px;
+        background: blue;
+      }
+      .scollBox {
+        border: 1px solid red;
+        width: 400px;
+        height: 500px;
+        overflow-y: scroll;
+      }
+      .scollBox > div {
+        height: 1000px;
+        width: 100%;
+        background: #999;
+      }
+      body {
+        min-height: 100px;
+      }
+    </style>
+  </body>
+</html>
