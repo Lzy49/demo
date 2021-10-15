@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid-template-raws & grid-template-columns</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+    <style>
+      /* test1 */
+      .container1 {
+        width: 100px;
+        height: 100px;
+        display: grid;
+        grid-template-columns: 10px auto 10px;
+        grid-template-rows: auto;
+        grid-template-areas: ;
+      }
+      /* test2 */
+      .container {
+        width: 100px;
+        height: 100px;
+        display: grid;
+        grid-template-columns: 10px 1fr 5fr;
+        grid-template-rows: auto;
+      }
+    </style>
+  </body>
+</html>

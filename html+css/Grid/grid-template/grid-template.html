@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid-template-areas</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">header</div>
+      <div class="nav">nav</div>
+      <div class="content">content</div>
+      <div class="footer">footer</div>
+    </div>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .container {
+        width: 100vw;
+        height: 100vh;
+        display: grid;
+        grid-template:
+          [第一行]'header header' 100px[第一行end]
+          [第二行]'nav content' auto[第二行end]
+          [第三行]'footer footer' 100px[第三行end]
+          /100px auto;
+      }
+      .header {
+        grid-area: header;
+        background: red;
+      }
+      .nav {
+        grid-area: nav;
+        background: green;
+      }
+      .content {
+        grid-area: content;
+        background: gold;
+      }
+      .footer {
+        grid-area: footer;
+        background: pink;
+      }
+    </style>
+  </body>
+</html>
