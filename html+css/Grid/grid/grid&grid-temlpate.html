@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header"></div>
+      <div class="nav"></div>
+      <div class="content"></div>
+      <div class="footer"></div>
+    </div>
+    <style>
+      .container {
+        display: grid;
+        width: 500px;
+        height: 500px;
+        grid:
+          'header header header ' 50px
+          'nav content content' auto
+          'footer footer footer' 50px
+          /50px auto auto;
+        gap: 10px;
+        background: gray;
+      }
+      .header {
+        grid-area: header;
+        background: red;
+      }
+      .nav {
+        grid-area: nav;
+        background: green;
+      }
+      .content {
+        grid-area: content;
+        background: gold;
+      }
+      .footer {
+        grid-area: footer;
+        background: pink;
+      }
+    </style>
+  </body>
+</html>

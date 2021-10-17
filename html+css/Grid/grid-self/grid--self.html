@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>grid-self</title>
+  </head>
+  <body>
+    <style>
+      .container {
+        display: grid;
+        width: 1000px;
+        height: 100px;
+        display: grid;
+        grid-template: 100px / repeat(auto-fill, 100px);
+        gap: 1px;
+        justify-items: center;
+        align-items: center;
+      }
+      .container > div {
+        background: gold;
+      }
+      .container > div > div {
+        background: pink;
+        width: 50px;
+        height: 50px;
+      }
+      .container > div:first-of-type {
+        align-self: start;
+        justify-self: start;
+      }
+    </style>
+    <div class="container">
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  </body>
+</html>
