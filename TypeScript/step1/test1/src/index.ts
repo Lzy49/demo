@@ -1,0 +1,1 @@
+let hello:string = 'Helle TypeScript'
