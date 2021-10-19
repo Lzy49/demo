@@ -1,1 +1,0 @@
-var hello = 'Helle TypeScript';
