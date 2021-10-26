@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todos</title>
+  </head>
+  <body>
+    <div id="app">
+      <div><input type="text" v-model="thing" @keydown.enter="addTodo" /></div>
+      <ul v-if="all !== 0">
+        <li v-for="(item,index) in list" :key="index" :class="{done:item.done}">
+          <input type="checkbox" v-model="item.done" /> {{item.label}}
+        </li>
+      </ul>
+      <div v-else>
+        暂无数据
+      </div>
+      
+      <div>
+        全选<input type="checkbox" v-model="check" />{{doneNumber}} / {{all}}
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const { ref, computed } = Vue;
+      Vue.createApp({
+        setup() {
+          const thing = ref(''); // 某事
+          const list = ref([]);
+          const all = computed(() => list.value.length);
+          const doneNumber = computed(
+            () => list.value.filter((item) => item.done === true).length
+          );
+          return {
+            thing,
+            list,
+            addTodo() {
+              console.log('喝点');
+              list.value.push({
+                label: thing.value,
+                done: false
+              });
+              thing.value = '';
+            },
+            all,
+            doneNumber,
+            check: computed({
+              set(v) {
+                list.value.forEach((element, index) => {
+                  list.value[index].done = v;
+                });
+              },
+              get() {
+                return doneNumber === all;
+              }
+            })
+          };
+        }
+      }).mount('#app');
+    </script>
+  </body>
+  <style>
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+</html>
