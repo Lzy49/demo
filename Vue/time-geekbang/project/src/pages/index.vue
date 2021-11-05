@@ -9,6 +9,9 @@
     <router-link to="/class7">
       07 | 巧妙的响应式：深入理解Vue 3的响应式机制
     </router-link>
+    <router-link to="/class8">
+      08 | 组件化：如何像搭积木一样开发网页
+    </router-link>
   </div>
 </template>
 <style scoped lang="scss">
