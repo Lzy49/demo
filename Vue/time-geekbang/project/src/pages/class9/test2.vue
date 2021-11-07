@@ -15,7 +15,7 @@
     </transition-group>
     <div class="animation">
       <div class="bin">🗑</div>
-      <transition name="rubbish">
+      <transition name="rubbish" v-if="deling">
         <div class="rubbish">📃</div>
       </transition>
     </div>
@@ -43,14 +43,19 @@ function add() {
   value.value = '';
 }
 interface Position {
-  right: number;
-  top: number;
+  left: string;
+  top: string;
 }
 const position = reactive<Position>({
-  right: 0,
-  top: 0
+  left: '0px',
+  top: '0px'
 });
+const deling = ref<boolean>(false);
 function del(e: Event) {
+  const item = e.target.getBoundingClientRect();
+  console.log(item);
+  position.top = item.top + 'px';
+  position.left = item.left + 'px';
   // position.value.right =
   // console.log(e.);
   // list.splice(index, 1);
@@ -100,8 +105,6 @@ function del(e: Event) {
 .todoList {
   width: 500px;
   padding: 20px;
-  border: 1px solid #eee;
-  position: relative;
   .bin {
     position: absolute;
     right: 20px;
@@ -109,12 +112,14 @@ function del(e: Event) {
   }
   .rubbish {
     position: absolute;
+    left: v-bind('position.left');
+    top: v-bind('position.top');
   }
   .rubbish-leave-active {
     transition: 1s all ease;
   }
   .rubbish-leave-from {
-    right: v-bind('position.right');
+    left: v-bind('position.left');
     top: v-bind('position.top');
   }
   .rubbish-leave-to {
