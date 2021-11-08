@@ -10,19 +10,24 @@
       <li v-for="(item, index) in list" :key="item.label">
         <input type="checkbox" v-model="item.done" />
         {{ item.label }}
-        <span :data-index="index" @click="del">❌</span>
+        <span @click="del($event, index)">❌</span>
       </li>
     </transition-group>
     <div class="animation">
       <div class="bin">🗑</div>
-      <transition name="rubbish" v-if="deling">
-        <div class="rubbish">📃</div>
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        name="rubbish"
+      >
+        <div v-show="animate.show" class="rubbish">📃</div>
       </transition>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
+import { ref, reactive, RendererElement } from 'vue';
 const value = ref<string>('');
 interface Thing {
   done: boolean;
@@ -42,24 +47,34 @@ function add() {
   });
   value.value = '';
 }
-interface Position {
-  left: string;
-  top: string;
+interface RemoveTodo {
+  show: boolean;
+  el: Element | null;
 }
-const position = reactive<Position>({
-  left: '0px',
-  top: '0px'
+const animate = reactive<RemoveTodo>({
+  show: false,
+  el: null
 });
-const deling = ref<boolean>(false);
-function del(e: Event) {
-  const item = e.target.getBoundingClientRect();
-  console.log(item);
-  position.top = item.top + 'px';
-  position.left = item.left + 'px';
-  // position.value.right =
-  // console.log(e.);
-  // list.splice(index, 1);
-  // getBoundingClientRect();
+function del(e: Event, index: number) {
+  animate.el = e.target as Element;
+  animate.show = true;
+  list.splice(index, 1);
+}
+function beforeEnter(el: RendererElement) {
+  let dom = animate.el as HTMLElement;
+  let rect = dom.getBoundingClientRect();
+  let x = window.innerWidth - rect.left - 16 - 30;
+  let y = rect.top - 26 - 10;
+  el.style.transform = `translate(-${x}px, ${y}px)`;
+}
+function enter(el: RendererElement, done: any) {
+  document.body.offsetHeight;
+  el.style.transform = `translate(0,0)`;
+  el.addEventListener('transitionend', done);
+}
+function afterEnter(el: RendererElement) {
+  animate.show = false;
+  el.style.display = 'none';
 }
 </script>
 
@@ -105,26 +120,16 @@ function del(e: Event) {
 .todoList {
   width: 500px;
   padding: 20px;
-  .bin {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-  }
-  .rubbish {
-    position: absolute;
-    left: v-bind('position.left');
-    top: v-bind('position.top');
-  }
-  .rubbish-leave-active {
-    transition: 1s all ease;
-  }
-  .rubbish-leave-from {
-    left: v-bind('position.left');
-    top: v-bind('position.top');
-  }
-  .rubbish-leave-to {
-    right: 20px;
-    top: 20px;
+  .animation {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    z-index: 100;
+    .rubbish {
+      position: absolute;
+      top: 0;
+      transition: all 0.5s linear;
+    }
   }
 }
 </style>
