@@ -1,6 +1,10 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import { store, key } from './pages/class10/vuex';
+import myStore from './pages/class10/myVuex';
 const app = createApp(App);
 app.use(router);
+app.use(myStore);
+app.use(store, key);
 app.mount('#app');

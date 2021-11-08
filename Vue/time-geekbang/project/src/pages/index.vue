@@ -15,6 +15,9 @@
     <router-link to="/class9">
       09 | 动画：Vue 中如何实现动画效果？
     </router-link>
+    <router-link to="/class10">
+      10 | 数据流：如何使用 Vuex 设计你的数据流
+    </router-link>
   </div>
 </template>
 <style scoped lang="scss">
