@@ -22,4 +22,5 @@ enum E {}
 namespace E {
   export const age = 0;
 }
-console.log(E.age)
+console.log(E.age);
+// E.age = 'nihao ';
