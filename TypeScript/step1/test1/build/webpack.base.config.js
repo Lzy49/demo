@@ -29,6 +29,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/tpl/index.html'
     }),
-    new ForkTsCheckerWebpackPlugin()
+    // new ForkTsCheckerWebpackPlugin()
   ]
 };
