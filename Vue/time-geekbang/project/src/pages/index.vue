@@ -18,6 +18,9 @@
     <router-link to="/class10">
       10 | 数据流：如何使用 Vuex 设计你的数据流
     </router-link>
+    <router-link to="/class13">
+      13 | JSX：应对更灵活的开发场景，你需要 JSX
+    </router-link>
   </div>
 </template>
 <style scoped lang="scss">
