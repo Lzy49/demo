@@ -40,7 +40,7 @@ function staticFun() {
  *  - String.prototype.slice(startIndex,endIndex) //=> String
  *  - String.prototype.substr(startIndex,length) //=> String
  *  - String.prototype.substring(startIndex,endIndex) //=> String
- *  - String.prototype.splie(separator,limit) //=> Array
+ *  - String.prototype.split(separator,limit) //=> Array
  * - 大小写
  *  - String.prototype.toLocaleLowerCase() //=> String
  *  - String.prototype.toLocaleUpperCase() //=> String
